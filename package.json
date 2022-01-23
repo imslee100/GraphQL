@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/imslee100/GraphQL#readme",
   "dependencies": {
+    "express": "^4.17.2",
+    "express-graphql": "^0.11.0",
     "graphql": "^15.3.0"
   }
 }
