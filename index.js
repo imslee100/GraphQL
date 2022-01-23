@@ -19,7 +19,9 @@ const schema = buildSchema(`
         getProduct ( id: ID! ): Product
     }
     type Mutation {
-        addProduct(input: ProductInput): Product
+        addProduct( input: ProductInput ): Product
+        updateProduct( id: ID!, input : ProductInput! ) : Product
+        deleteProduct( id : ID! ) : String
     }
 `);
 
@@ -42,6 +44,19 @@ const root = {
         products.push(input);
         return root.getProduct({id : input.id});
     },
+    updateProduct : ({id, input}) => {
+        const index = products.findIndex( product => product.id === parseInt(product.id) )
+        products[index] = {
+            id : parseInt(id),
+            ...input
+        }
+        return products[index];
+    },
+    deleteProduct : ({ id }) => {
+        const index = products.findIndex( product => product.id === parseInt(product.id) )
+        products.splice(index,1)
+        return "Remove Success";
+    }
 };
 
 const app = express();
